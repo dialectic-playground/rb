@@ -6,7 +6,8 @@
 # project listed in IMPLEMENTED in the root Makefile.
 # - Container (podman): `make check` in the toolchain image (./Containerfile), on Linux.
 # - Native (Linux, macOS, Windows): `make check roundtrip` with DP_RUNTIME=local;
-#   toolchain: ruby/setup-ruby (4.0, includes Bundler).
+#   toolchain: ruby/setup-ruby (4.0, includes Bundler and, on Windows, the MSYS2 devkit
+#   that builds the C extensions of the locked development gems).
 # - Shared tooling, DCO, and the required "CI result" check, as in every repository.
 #
 # Actions are pinned to full commit SHAs (organization policy); Dependabot keeps them current.
