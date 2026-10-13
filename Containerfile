@@ -1,13 +1,17 @@
-# Toolchain image for REPO-NAME (container-first; see tools/dp-run).
+# Toolchain image for dialectic-playground/rb: Ruby (container-first; see tools/dp-run).
 #
-# TEMPLATE: replace the base image with the official image for this repository's toolchain,
-# pinned by its multi-architecture index digest (FROM image:tag@sha256:...), and add only
-# what that image lacks. Keep `make` and the final ENV line. Dependabot (docker) keeps the
-# pin current.
-FROM docker.io/library/debian:trixie-slim@sha256:a29215f6a35e51e22adffa17f89e9d2ef06214e64a2bad10d765c46aea49f11f
+# Ruby 4.0; build and package tool: Bundler.
+# Official base image pinned by multi-architecture index digest, plus make and python3 (for the
+# curriculum's black-box runner). Dependabot (docker) refreshes the digest; moving to a new
+# release line is a deliberate change (keep `make toolchain` and the native CI in step).
+FROM docker.io/library/ruby:4.0-slim-trixie@sha256:ba6a00593739f9cb66de80ad2e395a93a52a13635867ee32918ba0ec083b1ff6
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends make git ca-certificates \
+    && apt-get install -y --no-install-recommends make python3 \
     && rm -rf /var/lib/apt/lists/*
 
-ENV DP_IN_CONTAINER=1
+# Gems and bundles in the mounted cache (the image's GEM_HOME is read-only for your user).
+ENV GEM_HOME=/dp-cache/ruby/gems \
+    BUNDLE_PATH=/dp-cache/ruby/bundle \
+    PATH=/dp-cache/ruby/gems/bin:$PATH \
+    DP_IN_CONTAINER=1
