@@ -53,7 +53,8 @@ check-repository:
 toolchain:
 	python3 --version || python --version
 	make --version | head -1
-	ruby -e 'puts RUBY_VERSION' | tee /dev/stderr | grep -q '^4\.0\.'
+	@version="$$(ruby -e 'puts RUBY_VERSION')"; echo "$$version"; echo "$$version" | grep -q '^4\.0\.' \
+		|| { echo "toolchain: expected a version matching ^4\.0\." >&2; exit 1; }
 	bundle --version
 
 projects:
