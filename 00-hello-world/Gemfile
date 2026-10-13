@@ -1,0 +1,9 @@
+# frozen_string_literal: true
+
+# Development dependencies of dp-hello (the tool itself needs only the Ruby standard library).
+# Exact versions are locked in Gemfile.lock; Dependabot (bundler) proposes updates.
+source 'https://rubygems.org'
+
+# minitest is a bundled gem, not a default gem: Bundler only loads it when it is listed here.
+gem 'minitest', '~> 6.0'
+gem 'rubocop', '~> 1.0', require: false

@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# Launcher for dp-hello (00-hello-world): everything else lives in ../lib.
+require_relative '../lib/dp_hello'
+
+exit DpHello::CLI.main(ARGV)
