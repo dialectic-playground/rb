@@ -6,6 +6,11 @@ AllCops:
   Exclude:
     - 'vendor/**/*'
 
+# The repository checks out LF everywhere (.gitattributes); the default, native, expects CRLF
+# on Windows.
+Layout/EndOfLine:
+  EnforcedStyle: lf
+
 # Minitest classes are self-describing, and table-like test methods read best unsplit.
 Style/Documentation:
   Exclude:
