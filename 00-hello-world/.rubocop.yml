@@ -1,0 +1,25 @@
+# RuboCop configuration for dp-hello: the defaults, plus every new cop, on Ruby 4.0.
+AllCops:
+  TargetRubyVersion: 4.0
+  NewCops: enable
+  SuggestExtensions: false
+  Exclude:
+    - 'vendor/**/*'
+
+# The repository checks out LF everywhere (.gitattributes); the default, native, expects CRLF
+# on Windows.
+Layout/EndOfLine:
+  EnforcedStyle: lf
+
+# Minitest classes are self-describing, and table-like test methods read best unsplit.
+Style/Documentation:
+  Exclude:
+    - 'src/test/**/*'
+
+Metrics/AbcSize:
+  Exclude:
+    - 'src/test/**/*'
+
+Metrics/MethodLength:
+  Exclude:
+    - 'src/test/**/*'

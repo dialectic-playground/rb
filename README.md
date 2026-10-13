@@ -16,7 +16,7 @@ This repository implements the eleven projects of the
 specified to the byte by the curriculum and verified by its black-box tests on Linux, macOS,
 and Windows.
 
-**Status:** repository and toolchain ready; no projects implemented yet.
+**Status:** Implemented projects: 00-hello-world.
 
 ## Ruby at a glance
 
@@ -35,9 +35,24 @@ and Windows.
 | Release line | Ruby 4.0 |
 | Build / package tool | Bundler |
 | Container image | `ruby:4.0-slim-trixie`, pinned by digest ([`Containerfile`](Containerfile)) |
-| Native CI | ruby/setup-ruby (4.0, includes Bundler) |
+| Native CI | ruby/setup-ruby (4.0, includes Bundler; on Windows, RubyInstaller with the MSYS2 devkit) |
+| Unit tests | minitest (listed in each project's `Gemfile`: it is a bundled gem, not a default gem) |
+| Lint / format | RuboCop (`bundle exec rubocop` / `rubocop --autocorrect`) |
+| Dependencies | Per project: `Gemfile` and `Gemfile.lock` (exact versions and checksums; Dependabot `bundler`) |
 
 `make toolchain` verifies that the container and native toolchains are on this release line.
+The container image adds `gcc` and `libc6-dev` to the slim Ruby image so Bundler can build the
+C extensions of the locked development gems (json, prism, racc); natively, ruby/setup-ruby
+provides a compiler. Bundler installs the gems outside the project directories
+(`BUNDLE_PATH=/dp-cache/ruby/bundle` in the container, the Ruby installation's gem directory
+natively); the tools themselves use only the standard library and run without Bundler.
+For a native build on Linux, install your distribution's Ruby headers (for example
+`ruby-devel` on Fedora) so the gems can compile.
+
+Each tool is an extensionless `#!/usr/bin/env ruby` launcher in its project's `src/bin/`.
+`make install` copies `src/bin` and `src/lib` to `$(LIBDIR)/rb/<project>/` and writes a small
+`#!/bin/sh` launcher to `$(BINDIR)`. **Windows:** run the tools from Git Bash or MSYS2, which
+honor `#!` lines.
 
 ## Layout
 
