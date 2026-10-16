@@ -1,3 +1,19 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+**Table of Contents** _generated with [DocToc](https://github.com/thlorenz/doctoc)_
+
+- [rb](#rb)
+  - [Ruby at a glance](#ruby-at-a-glance)
+  - [Toolchain](#toolchain)
+  - [Layout](#layout)
+  - [Development](#development)
+  - [Implementing a project](#implementing-a-project)
+  - [Contributing](#contributing)
+  - [License](#license)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/dialectic-playground/.github/main/assets/rb/dist/logo-dark.svg">
@@ -20,25 +36,25 @@ and Windows.
 
 ## Ruby at a glance
 
-| Aspect | Ruby |
-| :-- | :-- |
-| File extension | `.rb` |
-| CLI classification | Included |
-| Image category | First-Class |
-| Access to OS primitives | High (via native process automation libraries) |
-| Entry-point mechanism | Interpreter bootstraps file and wraps arguments into ARGV array |
+| Aspect                  | Ruby                                                            |
+| :---------------------- | :-------------------------------------------------------------- |
+| File extension          | `.rb`                                                           |
+| CLI classification      | Included                                                        |
+| Image category          | First-Class                                                     |
+| Access to OS primitives | High (via native process automation libraries)                  |
+| Entry-point mechanism   | Interpreter bootstraps file and wraps arguments into ARGV array |
 
 ## Toolchain
 
-| | |
-| :-- | :-- |
-| Release line | Ruby 4.0 |
-| Build / package tool | Bundler |
-| Container image | `ruby:4.0-slim-trixie`, pinned by digest ([`Containerfile`](Containerfile)) |
-| Native CI | ruby/setup-ruby (4.0, includes Bundler; on Windows, RubyInstaller with the MSYS2 devkit) |
-| Unit tests | minitest (listed in each project's `Gemfile`: it is a bundled gem, not a default gem) |
-| Lint / format | RuboCop (`bundle exec rubocop` / `rubocop --autocorrect`) |
-| Dependencies | Per project: `Gemfile` and `Gemfile.lock` (exact versions and checksums; Dependabot `bundler`) |
+|                      |                                                                                                |
+| :------------------- | :--------------------------------------------------------------------------------------------- |
+| Release line         | Ruby 4.0                                                                                       |
+| Build / package tool | Bundler                                                                                        |
+| Container image      | `ruby:4.0-slim-trixie`, pinned by digest ([`Containerfile`](Containerfile))                    |
+| Native CI            | ruby/setup-ruby (4.0, includes Bundler; on Windows, RubyInstaller with the MSYS2 devkit)       |
+| Unit tests           | minitest (listed in each project's `Gemfile`: it is a bundled gem, not a default gem)          |
+| Lint / format        | RuboCop (`bundle exec rubocop` / `rubocop --autocorrect`)                                      |
+| Dependencies         | Per project: `Gemfile` and `Gemfile.lock` (exact versions and checksums; Dependabot `bundler`) |
 
 `make toolchain` verifies that the container and native toolchains are on this release line.
 The container image adds `gcc` and `libc6-dev` to the slim Ruby image so Bundler can build the
@@ -56,14 +72,14 @@ honor `#!` lines.
 
 ## Layout
 
-| Path | Contents |
-| :--- | :--- |
+| Path                                  | Contents                                                                                                          |
+| :------------------------------------ | :---------------------------------------------------------------------------------------------------------------- |
 | `00-hello-world/` … `10-sys-monitor/` | One workspace per curriculum project: `Makefile` (with `DP_*` hooks), HLD, LLD, RTM, master test plan, and `src/` |
-| `sdlc-curriculum/` | The curriculum, as a git submodule pinned to a release tag |
-| `Makefile` | `make check` (repository, toolchain, implemented projects), `toolchain`, `projects`, `roundtrip` |
-| `Containerfile`, `.devcontainer/` | The toolchain image and the matching dev container |
-| `tools/dp-run`, `tools/container.mk` | Shared container tooling (copies of the canonical files in `dialectic-playground/.github`) |
-| `.github/workflows/ci.yml` | CI: container and native (Linux, macOS, Windows) `make` targets, shared-tooling check, DCO |
+| `sdlc-curriculum/`                    | The curriculum, as a git submodule pinned to a release tag                                                        |
+| `Makefile`                            | `make check` (repository, toolchain, implemented projects), `toolchain`, `projects`, `roundtrip`                  |
+| `Containerfile`, `.devcontainer/`     | The toolchain image and the matching dev container                                                                |
+| `tools/dp-run`, `tools/container.mk`  | Shared container tooling (copies of the canonical files in `dialectic-playground/.github`)                        |
+| `.github/workflows/ci.yml`            | CI: container and native (Linux, macOS, Windows) `make` targets, shared-tooling check, DCO                        |
 
 ## Development
 

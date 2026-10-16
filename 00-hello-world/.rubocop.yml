@@ -4,7 +4,7 @@ AllCops:
   NewCops: enable
   SuggestExtensions: false
   Exclude:
-    - 'vendor/**/*'
+    - "vendor/**/*"
 
 # The repository checks out LF everywhere (.gitattributes); the default, native, expects CRLF
 # on Windows.
@@ -14,12 +14,12 @@ Layout/EndOfLine:
 # Minitest classes are self-describing, and table-like test methods read best unsplit.
 Style/Documentation:
   Exclude:
-    - 'src/test/**/*'
+    - "src/test/**/*"
 
 Metrics/AbcSize:
   Exclude:
-    - 'src/test/**/*'
+    - "src/test/**/*"
 
 Metrics/MethodLength:
   Exclude:
-    - 'src/test/**/*'
+    - "src/test/**/*"
