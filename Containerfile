@@ -8,6 +8,9 @@
 # `make toolchain` and the native CI in step).
 FROM docker.io/library/ruby:4.0-slim-trixie@sha256:ba6a00593739f9cb66de80ad2e395a93a52a13635867ee32918ba0ec083b1ff6
 
+# Debian keeps only the current version of each package, so apt versions cannot be pinned
+# reproducibly; the base image is pinned by digest instead.
+# hadolint ignore=DL3008
 RUN apt-get update \
     && apt-get install -y --no-install-recommends make python3 gcc libc6-dev \
     && rm -rf /var/lib/apt/lists/*
