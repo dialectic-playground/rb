@@ -6,7 +6,7 @@
 # development gems (json, prism, racc; the slim image has no compiler). Dependabot (docker)
 # refreshes the digest; moving to a new release line is a deliberate change (keep
 # `make toolchain` and the native CI in step).
-FROM docker.io/library/ruby:4.0-slim-trixie@sha256:ba6a00593739f9cb66de80ad2e395a93a52a13635867ee32918ba0ec083b1ff6
+FROM docker.io/library/ruby:4.0-slim-trixie@sha256:d8cb2c0714bdaba0f318af897a01d2dbde3cfa8e62d47e99cea55feb13c0e90d
 
 # Debian keeps only the current version of each package, so apt versions cannot be pinned
 # reproducibly; the base image is pinned by digest instead.
